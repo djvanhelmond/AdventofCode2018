@@ -24,8 +24,6 @@ class TimeDevice():
                 self.seenBefore.append(self.freq)
 
 
-
 timedevice = TimeDevice("./input.txt")
-
 print("Star 1: %i" % sum(timedevice.freqChangeList))
 print("Star 2: %i" % timedevice.freq)
