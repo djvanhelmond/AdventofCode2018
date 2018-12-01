@@ -18,10 +18,10 @@ class TimeDevice():
         seen = False
         while not seen:
             self.freq = self.freq + circleList.next()
-            if self.freq not in self.seenBefore:
-                self.seenBefore.append(self.freq)
-            else:
+            if self.freq in self.seenBefore:
                 seen = True
+            else:
+                self.seenBefore.append(self.freq)
 
 
 
