@@ -14,8 +14,7 @@ class Roster():
             m = re.match(r'\[([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})\] ([ #a-zA-Z0-9]*)', logline)
             ts = (int(m.group(2)) * 31 * 24 * 60 + int(m.group(3)) * 24 * 60 + int(m.group(4)) * 60 + int(m.group(5)))
             if m.group(6)[0] == "G": event = m.group(6).split()[1].replace("#", "")
-            elif m.group(6)[0] == "w": event = "W"
-            elif m.group(6)[0] == "f": event = "F"
+            else: event = m.group(6)[0]
             logentries[ts] = event
         return logentries
 
@@ -25,9 +24,9 @@ class Roster():
         while not len(self.logentries) == 0:
             ts = min(self.logentries.keys())
             event = self.logentries.pop(min(self.logentries.keys()))
-            if not (event == "F") and not (event == "W"): gid = event
-            if not (gid == "") and (event == "F"): startMin = ts
-            if not (gid == "") and (event == "W"):
+            if not (event == "f") and not (event == "w"): gid = event
+            if not (gid == "") and (event == "f"): startMin = ts
+            if not (gid == "") and (event == "w"):
                 if not int(gid) in self.guards.keys(): self.guards[int(gid)] = [0] * 60
                 for i in range(startMin % 60, ts % 60): self.guards[int(gid)][i] = self.guards[int(gid)][i] + 1
                 startMin = "none"
