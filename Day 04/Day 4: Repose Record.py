@@ -3,7 +3,7 @@
 class Guard():
     def __init__(self, id):
         self.id = id
-        self.sleeptimes = [0]*60
+        self.sleeptimes = [0] * 60
 
 class Roster():
     def __init__(self, inputFile):
@@ -16,7 +16,6 @@ class Roster():
         import re
         with open(inputFile) as f:
             INPUT = f.read().splitlines()
-
         for logline in INPUT:
             m = re.match(r'\[([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})\] ([ #a-zA-Z0-9]*)', logline)
             timestamp = (int(m.group(2)) * 31 * 24 * 60 + \
