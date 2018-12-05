@@ -15,13 +15,13 @@ class Polymer():
     def __removeBroken(self, brokenUnit):
         newchain = []
         for pos in range(len(self.chain)):
-            if not ((self.chain[pos] == brokenUnit) or (abs(ord(self.chain[pos]) - ord(brokenUnit)) == 32)):
+            if not ((self.chain[pos] == brokenUnit) or (self.chain[pos] == brokenUnit.swapcase())):
                 newchain.append(self.chain[pos])
         return newchain
 
     def __findReaction(self):
         for pos in range(len(self.chain) - 1):
-            if abs(ord(self.chain[pos]) - ord(self.chain[pos + 1])) == 32:
+            if self.chain[pos] == self.chain[pos + 1].swapcase():
                 self.chain.pop(pos)
                 self.chain.pop(pos)
                 return True
