@@ -2,22 +2,16 @@
 
 class Polymer():
     def __init__(self, inputFile, brokenUnit):
-        self.chain = self.__parseInputFile(inputFile)
+        with open(inputFile) as f:
+            self.chain = list(f.read().splitlines()[0])
         if not brokenUnit == None:
-            self.chain = self.__removeBroken(brokenUnit)
+            newchain = []
+            for pos in range(len(self.chain)):
+                if not ((self.chain[pos] == brokenUnit) or (self.chain[pos] == brokenUnit.swapcase())):
+                    newchain.append(self.chain[pos])
+            self.chain = newchain
         while self.__findReaction():
             pass
-
-    def __parseInputFile(self, inputFile):
-        with open(inputFile) as f:
-            return list(f.read().splitlines()[0])
-
-    def __removeBroken(self, brokenUnit):
-        newchain = []
-        for pos in range(len(self.chain)):
-            if not ((self.chain[pos] == brokenUnit) or (self.chain[pos] == brokenUnit.swapcase())):
-                newchain.append(self.chain[pos])
-        return newchain
 
     def __findReaction(self):
         for pos in range(len(self.chain) - 1):
